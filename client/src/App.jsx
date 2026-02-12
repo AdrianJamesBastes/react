@@ -32,22 +32,24 @@ function App() {
                 <span className="file-msg">
                   {monitorFile1 ? monitorFile1.name : "Drag & drop or click"}
                 </span>
-                <input
-                  title=''
-                  className="file-input"
-                  type="file"
-                  accept=".csv,text/csv"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
+                    <input
+                    className="file-input"
+                    title=''
+                    type="file"
+                    accept=".csv" 
+                    onChange={(e) => {
+                      const file = e.target.files[0];
 
-                    if (file && file.type !== "text/csv") {
-                      alert("Please upload a valid CSV file.");
-                      return;
-                    }
+                      if (!file) return;
 
-                    setMonitorFile1(file);
-                  }}
-                />
+                      if (!file.name.toLowerCase().endsWith('.csv')) {
+                        alert("Please upload a valid CSV file.");
+                        e.target.value = "";
+                        return;
+                      }
+                      setMonitorFile1(file);
+                    }}
+                  />
               </div>
             </div>
 
@@ -57,22 +59,28 @@ function App() {
                 <span className="file-msg">
                   {monitorFile2 ? monitorFile2.name : "Drag & drop or click"}
                 </span>
-                <input
-                  className="file-input"
-                  title=''
-                  type="file"
-                  accept=".csv,text/csv"
-                  onChange={(e) => {
-                    const file = e.target.files[0];
+                  <input
+                    className="file-input"
+                    title=''
+                    type="file"
+                    accept=".csv" // Simplified accept attribute
+                    onChange={(e) => {
+                      const file = e.target.files[0];
 
-                    if (file && file.type !== "text/csv") {
-                      alert("Please upload a valid CSV file.");
-                      return;
-                    }
+                      // 1. Check if file exists
+                      if (!file) return;
 
-                    setMonitorFile2(file);
-                  }}
-                />
+                      // 2. Check file extension (Robust across all devices)
+                      if (!file.name.toLowerCase().endsWith('.csv')) {
+                        alert("Please upload a valid CSV file.");
+                        e.target.value = ""; // Clear the bad input
+                        return;
+                      }
+
+                      // 3. If valid, set the state
+                      setMonitorFile2(file);
+                    }}
+                  />
               </div>
             </div>
 
