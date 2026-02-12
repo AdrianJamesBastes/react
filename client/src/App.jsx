@@ -95,6 +95,7 @@ function App() {
           <div className="output-card">
             <div className="output-header">
               <h3>Output:</h3>
+              <input className='search-bar' type='text' placeholder='Search'/>
             </div>
             <div className="output-box">
               <p className="placeholder-text">Scan results will appear here...</p>
